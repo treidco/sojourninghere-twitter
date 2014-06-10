@@ -1,4 +1,6 @@
 deploy:
   provider: heroku
+  buildpack: play
+  app: sh-tw
   api_key:
     secure: aHXi4JF24EJwUpa3lYtdhs+KFhq+DEOoivUuUiSIeUbtyKGkptOUphmV4FC5y6NKUquH0CjaHdU8hISjva3aEgSCIoKwyvhkhceP+7sXe/e6iB5X72dOozM25X+HRgzTr8a8IeARjca4AtyBCx5rGLxgxKcqG5nUj5OwFKC29CU=
