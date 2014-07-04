@@ -1,4 +1,4 @@
-script: sbt test
+language: scala
 deploy:
   provider: heroku
   buildpack: scala
