@@ -2,6 +2,7 @@
 *.log
 
 .idea/
+.idea_modules/
 
 # sbt specific
 .cache/
