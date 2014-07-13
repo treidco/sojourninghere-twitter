@@ -6,13 +6,6 @@ import org.junit.runner._
 
 import play.api.test._
 
-
-object TokenSpec {
-
-  val credentials = ???
-
-}
-
 @RunWith(classOf[JUnitRunner])
 class TokenSpec extends Specification {
 
@@ -20,12 +13,12 @@ class TokenSpec extends Specification {
 
     "base64 encode credentials" in new WithApplication {
       val creds = "user:pass"
-      Token.base64EncodeCredentials(creds) must beEqualTo("dXNlcjpwYXNz")
+      Token.base64EncodedCredentials must beEqualTo("dXNlcjpwYXNz")
     }
 
-    "obtain access token" in {
-      Token.obtainAccessToken(TokenSpec.credentials) must beEqualTo("blah")
-    }
+//    "credentials should be read" in {
+//
+//    }
 
   }
 }
