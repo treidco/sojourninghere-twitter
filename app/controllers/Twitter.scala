@@ -9,7 +9,7 @@ object Twitter extends Controller {
     val encodedCredentials = Token.base64EncodedCredentials
     val accessToken = Token.obtainAccessToken("Basic " + encodedCredentials.filter(_ >= ' '))
 
-    Ok(views.html.token(accessToken))
+    Ok(views.html.token(""))
   }
 
   def index = TODO()
