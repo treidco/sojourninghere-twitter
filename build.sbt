@@ -14,3 +14,7 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "org.mockito" % "mockito-core" % "1.9.5"
+
+libraryDependencies += "com.google.inject" % "guice" % "3.0"
+
+libraryDependencies += "javax.inject" % "javax.inject" % "1"
