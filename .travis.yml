@@ -5,3 +5,7 @@ deploy:
   app: sh-tw
   api_key:
     secure: aHXi4JF24EJwUpa3lYtdhs+KFhq+DEOoivUuUiSIeUbtyKGkptOUphmV4FC5y6NKUquH0CjaHdU8hISjva3aEgSCIoKwyvhkhceP+7sXe/e6iB5X72dOozM25X+HRgzTr8a8IeARjca4AtyBCx5rGLxgxKcqG5nUj5OwFKC29CU=
+env:
+  matrix:
+  - secure: W5759pDugC+nq71znMlE89nltSYHT6lFQjaANjhEsBvU1rt55ZuGY+2X599GOk8CdfNSBn1GgUh8bszT/PmZ8my5z0UETCN8R1FyiPS0/JUQEJeRnQuqdm+DPrvPeQ+E90nHBIE2z05iFZPJZL9mnKDl7vLAi9snabDvWksZ9Tk=
+  - secure: Iw55x6nzg+y3Q6wSxV0yOAabiK/ktoKRyVlmovInI8k1mfVlUBMR9bB8ao2gbBep0x0H1FICc6I0LQAJmR946fikvt/AqRbMOu1g9md4OL38bdbwrXKzU/jG1d80FCH1BRTsLDeHXYnVcknSgcaYW9tnToNo4C0olTBSaJl0CEM=
