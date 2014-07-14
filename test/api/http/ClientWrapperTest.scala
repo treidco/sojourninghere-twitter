@@ -6,10 +6,10 @@ import org.specs2.mock.Mockito
 import play.api.libs.ws.{WS, WSResponse}
 import scala.concurrent.Future
 
-class HttpManagerTest extends Specification with Mockito {
+class ClientWrapperTest extends Specification with Mockito {
 
 
-  "HttpManager" should {
+  "ClientWrapper" should {
 
     "execute api.http requests" in new WithApplication {
       val client = mock[ClientWrapper]

@@ -9,8 +9,8 @@ abstract class ClientWrapper {
 
 class WSClientWrapper extends ClientWrapper {
 
-
   override def execute(holder: WSRequestHolder): Future[WSResponse] = {
     holder.execute()
   }
+
 }

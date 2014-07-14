@@ -7,9 +7,10 @@ import javax.inject.Inject
 import play.api.Play
 import play.api.Play.current
 import play.api.libs.json.Json
-import api.http.{ClientWrapper, WSClientWrapper}
+import api.http.ClientWrapper
+import api.auth.TokenManager.{InvalidToken, BearerToken}
 
-class TokenManager @Inject()(credentials: Credentials, client: ClientWrapper) {
+object TokenManager {
 
   sealed trait Token
 
@@ -17,29 +18,38 @@ class TokenManager @Inject()(credentials: Credentials, client: ClientWrapper) {
 
   case class BearerToken(value: String) extends Token
 
+  private var bearerToken: Token = InvalidToken
+
+}
+
+class TokenManager @Inject()(credentials: Credentials, client: ClientWrapper) {
+
   implicit val context = play.api.libs.concurrent.Execution.Implicits.defaultContext
   val api_url = Play.configuration.getString("twitter.api.url").getOrElse("https://api.twitter.com/oauth2/token")
 
-  private var bearerToken: Token = InvalidToken
-
-  def invalidateToken = bearerToken = InvalidToken
+  def invalidateToken = {
+    TokenManager.bearerToken = TokenManager.InvalidToken
+  }
 
   def retrieveToken: String = {
-    bearerToken match {
+    println("retrieveToken")
+    TokenManager.bearerToken match {
       case InvalidToken => refreshToken
       case token: BearerToken => token.value
     }
   }
 
   def refreshToken = {
-    val value = obtainNewAccessToken(base64EncodedCredentials) //TODO curry
-    bearerToken = BearerToken(value)
+    println("refreshToken")
+    val value = obtainNewAccessToken("Basic " + base64EncodedCredentials.filter(_ >= ' ')) //TODO curry
+    TokenManager.bearerToken = BearerToken(value)
     value
   }
 
   def base64EncodedCredentials: String = new sun.misc.BASE64Encoder().encode(credentials.retrieve.getBytes)
 
   def obtainNewAccessToken(encodedCredentials: String): String = {
+    println("obtainAccessToken")
     val holder = WS.url(api_url)
     val complexHolder = holder
       .withHeaders("Authorization" -> encodedCredentials, "Content-Type" -> "application/x-www-form-urlencoded;charset=UTF-8")
