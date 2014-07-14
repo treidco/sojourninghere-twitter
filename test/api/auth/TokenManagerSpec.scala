@@ -1,4 +1,5 @@
 package api.auth
+
 import org.specs2.mock.Mockito
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -7,9 +8,9 @@ import org.junit.runner._
 import play.api.test._
 
 @RunWith(classOf[JUnitRunner])
-class TokenSpec extends Specification with Mockito {
+class TokenManagerSpec extends Specification with Mockito {
 
-  "Token" should {
+  "TokenManager" should {
 
     "base64 encode credentials" in new WithApplication {
       val creds = mock[Credentials]
@@ -18,6 +19,8 @@ class TokenSpec extends Specification with Mockito {
       val token = new TokenManager(creds)
       token.base64EncodedCredentials must beEqualTo("dXNlcjpwYXNz")
     }
+
+    "store token"
 
   }
 }

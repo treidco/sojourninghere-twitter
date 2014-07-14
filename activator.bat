@@ -69,7 +69,7 @@ if "%JAVAOK%"=="false" (
   )
   echo.
   echo Please go to
-  echo   http://www.oracle.com/technetwork/java/javase/downloads/index.html
+  echo   api.http://www.oracle.com/technetwork/java/javase/downloads/index.html
   echo and download a valid Java JDK and install before running Activator.
   echo.
   echo If you think this message is in error, please check
