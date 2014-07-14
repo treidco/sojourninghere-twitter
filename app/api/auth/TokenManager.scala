@@ -1,7 +1,5 @@
 package api.auth
 
-import play.api.libs.ws.WSResponse
-import scala.concurrent.Await
 import javax.inject.Inject
 import api.http.ClientWrapper
 import api.auth.TokenManager.{InvalidToken, BearerToken}
@@ -25,27 +23,24 @@ class TokenManager @Inject()(credentials: Credentials, client: ClientWrapper) {
 
   def obtainAccessToken = retrieveToken(service.requestNewAccessToken)
 
-  def readToken = ???
-
-  def invalidateToken = {
-    TokenManager.bearerToken = TokenManager.InvalidToken
-  }
+  def invalidateToken() = TokenManager.bearerToken = TokenManager.InvalidToken
 
   def retrieveToken(fetchToken: String => String): String = {
+    println("retrieveToken")
     TokenManager.bearerToken match {
       case InvalidToken => {
-        val value = fetchToken("Basic " + base64EncodedCredentials.filter(_ >= ' '))
-        setAccessToken(value)
-        value
+        setAccessToken(fetchToken("Basic " + base64EncodedCredentials.filter(_ >= ' ')))
       }
       case token: BearerToken => token.value
     }
   }
 
-  private def setAccessToken(value: String) {
+  def base64EncodedCredentials: String = new sun.misc.BASE64Encoder().encode(credentials.retrieve.getBytes)
+
+  private def setAccessToken(value: String): String = {
     TokenManager.bearerToken = BearerToken(value)
+    value
   }
 
-  def base64EncodedCredentials: String = new sun.misc.BASE64Encoder().encode(credentials.retrieve.getBytes)
 
 }

@@ -6,7 +6,7 @@ import org.specs2.runner._
 import org.junit.runner._
 
 import play.api.test._
-import api.http.MockClientWrapper
+import api.http.ClientWrapper
 
 @RunWith(classOf[JUnitRunner])
 class TokenManagerSpec extends Specification with Mockito {
@@ -15,7 +15,7 @@ class TokenManagerSpec extends Specification with Mockito {
 
     "base64 encode credentials" in new WithApplication {
       val creds = mock[Credentials]
-      val client = new MockClientWrapper
+      val client = mock[ClientWrapper]
       val tokenManager = new TokenManager(creds, client)
 
       creds.retrieve returns "user:pass"
@@ -24,20 +24,18 @@ class TokenManagerSpec extends Specification with Mockito {
 
     "retrieve token" in new WithApplication {
       val creds = mock[Credentials]
-      val client = new MockClientWrapper
+      val client = mock[ClientWrapper]
       val tokenManager = new TokenManager(creds, client)
 
       creds.retrieve returns "user:pass"
-      client.body = "{\"token_type\":\"bearer\",\"access_token\":\"valid_token\"}"
-
 
       val mockResponseBody = (x: String) => "valid_token"
       tokenManager.retrieveToken(mockResponseBody) must beEqualTo("valid_token")
     }
 
-//        "invalidate token" in new WithApplication {
-//          tokenManager.invalidateToken
-//        }
+    //        "invalidate token" in new WithApplication {
+    //          tokenManager.invalidateToken
+    //        }
 
   }
 }

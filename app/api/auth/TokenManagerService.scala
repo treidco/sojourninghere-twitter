@@ -7,13 +7,15 @@ import scala.concurrent.duration._
 import api.http.ClientWrapper
 import play.api.Play
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import play.api.Play.current
+
 class TokenManagerService(client: ClientWrapper) {
 
   val api_url = Play.configuration.getString("twitter.api.url").getOrElse("https://api.twitter.com/oauth2/token")
 
 
   def requestNewAccessToken(encodedCredentials: String): String = {
-    //TODO curry response function?
     println("obtainAccessToken")
     val holder = WS.url(api_url)
     val complexHolder = holder
