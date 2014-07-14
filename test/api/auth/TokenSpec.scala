@@ -1,4 +1,4 @@
-package auth
+package api.auth
 import org.specs2.mock.Mockito
 import org.specs2.mutable._
 import org.specs2.runner._
@@ -15,7 +15,7 @@ class TokenSpec extends Specification with Mockito {
       val creds = mock[Credentials]
       creds.retrieve returns "user:pass"
 
-      val token = new Token(creds)
+      val token = new TokenManager(creds)
       token.base64EncodedCredentials must beEqualTo("dXNlcjpwYXNz")
     }
 

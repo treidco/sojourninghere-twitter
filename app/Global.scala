@@ -1,4 +1,4 @@
-import auth.{ProductionCredentials, Credentials}
+import api.auth.{ProductionCredentials, Credentials}
 import com.google.inject.{AbstractModule, Guice}
 import play.api.GlobalSettings
 

@@ -1,4 +1,4 @@
-package auth
+package api.auth
 
 import play.api.libs.ws.{WSResponse, WS}
 import scala.concurrent.{Future, Await}
@@ -7,7 +7,7 @@ import javax.inject.Inject
 import play.api.Play
 import play.api.Play.current
 
-class Token @Inject()(credentials: Credentials) {
+class TokenManager @Inject()(credentials: Credentials) {
 
   implicit val context = play.api.libs.concurrent.Execution.Implicits.defaultContext
   val api_url = Play.configuration.getString("twitter.api.url").getOrElse("https://api.twitter.com/oauth2/token")

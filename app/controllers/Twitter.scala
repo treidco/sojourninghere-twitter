@@ -1,14 +1,15 @@
 package controllers
 
 import play.api.mvc.{Action, Controller}
-import auth.Token
+import api.auth.TokenManager
 import javax.inject.Inject
 
-class Twitter @Inject() (token: Token) extends Controller {
+class Twitter @Inject() (tokenManager: TokenManager) extends Controller {
 
   def auth = Action {
-    val encodedCredentials = token.base64EncodedCredentials
-    val accessToken = token.obtainAccessToken("Basic " + encodedCredentials.filter(_ >= ' '))
+    //TODO store access token if appropriate
+    val encodedCredentials = tokenManager.base64EncodedCredentials
+    val accessToken = tokenManager.obtainAccessToken("Basic " + encodedCredentials.filter(_ >= ' '))
 
     Ok(views.html.token(""))
   }

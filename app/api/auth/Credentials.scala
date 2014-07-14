@@ -1,4 +1,4 @@
-package auth
+package api.auth
 
 import play.api.Play
 import play.api.Play.current
