@@ -49,6 +49,7 @@ class TokenManagerService(client: ClientWrapper) {
   def handleError(respBody: String = "") = {
     if (!respBody.isEmpty) println("Response body: " + respBody)
     println("Obtaining Access Token Failed")
+    println()
     "todo"
   } //TODO
 }
