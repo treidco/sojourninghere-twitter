@@ -4,7 +4,7 @@ import play.api.Play
 import play.api.Play.current
 
 abstract class Credentials {
-  def retrieve: String
+  def retrieveConsumerCredentials: String
 }
 
 class ProductionCredentials extends Credentials {
@@ -13,5 +13,6 @@ class ProductionCredentials extends Credentials {
   val consumerKey = Play.configuration.getString("twitter.consumer.key").getOrElse("key")
   val consumerSecret = Play.configuration.getString("twitter.consumer.secret").getOrElse("secret")
 
-  def retrieve = consumerKey + ":" + consumerSecret
+  def retrieveConsumerCredentials = consumerKey + ":" + consumerSecret
+
 }

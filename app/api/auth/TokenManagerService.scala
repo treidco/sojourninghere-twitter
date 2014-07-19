@@ -14,7 +14,6 @@ class TokenManagerService(client: ClientWrapper) {
 
   val api_url = Play.configuration.getString("twitter.api.url").getOrElse("https://api.twitter.com/oauth2/token")
 
-
   def requestNewAccessToken(encodedCredentials: String): String = {
     println("obtainAccessToken")
     val holder = WS.url(api_url)

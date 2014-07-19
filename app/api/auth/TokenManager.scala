@@ -3,8 +3,12 @@ package api.auth
 import javax.inject.Inject
 import api.http.ClientWrapper
 import api.auth.TokenManager.{InvalidToken, BearerToken}
+import play.api.Play
+import play.api.Play.current
 
 object TokenManager {
+
+  val tokenFromEnvVar = Play.configuration.getString("twitter.bearer.token").getOrElse("")
 
   sealed trait Token
 
@@ -12,7 +16,8 @@ object TokenManager {
 
   case class BearerToken(value: String) extends Token
 
-  private var bearerToken: Token = InvalidToken
+  private var bearerToken: Token =
+    if (tokenFromEnvVar.isEmpty) InvalidToken else BearerToken(tokenFromEnvVar)
 
 }
 
@@ -35,7 +40,7 @@ class TokenManager @Inject()(credentials: Credentials, client: ClientWrapper) {
     }
   }
 
-  def base64EncodedCredentials: String = new sun.misc.BASE64Encoder().encode(credentials.retrieve.getBytes)
+  def base64EncodedCredentials: String = new sun.misc.BASE64Encoder().encode(credentials.retrieveConsumerCredentials.getBytes)
 
   private def setAccessToken(value: String): String = {
     TokenManager.bearerToken = BearerToken(value)

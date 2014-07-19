@@ -3,21 +3,22 @@ package controllers
 import play.api.mvc.{Action, Controller}
 import api.auth.TokenManager
 import javax.inject.Inject
+import api.status.StatusService
 
-class Twitter @Inject() (tokenManager: TokenManager) extends Controller {
+class Twitter @Inject()(tokenManager: TokenManager, tweetService: StatusService) extends Controller {
 
   def auth = Action {
     val accessToken = tokenManager.obtainAccessToken
-    println("access token: " + accessToken)
     Ok(views.html.token(""))
   }
 
   def index = Action {
 
-//    val token = tokenManager.retrieveToken
+    val token = tokenManager.obtainAccessToken
+    val tweets = tweetService.getTweets(token)
 
+    Ok(views.html.index(tweets))
 
-    Ok(views.html.index("Tweets"))
   }
 
 }
