@@ -1,14 +1,13 @@
 package controllers
 
-import play.api.mvc.{Action, Controller}
-import api.auth.TokenManager
 import javax.inject.Inject
+
+import api.auth.TokenManager
 import api.status.StatusService
 import play.api.Logger
+import play.api.mvc.{Action, Controller}
 
 class Twitter @Inject()(tokenManager: TokenManager, tweetService: StatusService) extends Controller {
-
-
 
   def auth = Action {
     Logger("Twitter Controller").info("auth action")
@@ -28,7 +27,6 @@ class Twitter @Inject()(tokenManager: TokenManager, tweetService: StatusService)
     val tweets = tweetService.getTweets(token)
 
     Ok(views.html.index(tweets))
-
   }
 
 }

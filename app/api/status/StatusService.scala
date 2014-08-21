@@ -11,7 +11,7 @@ import play.api.Play.current
 
 class StatusService @Inject()(client: ClientWrapper) extends BaseStatusService {
 
-  def getTweets(token: String): String = {
+  override def getTweets(token: String): String = {
     println("get tweets")
     val authString = "Bearer " + token
     val holder = WS.url("https://api.twitter.com/1.1/statuses/user_timeline.json")

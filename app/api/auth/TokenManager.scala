@@ -31,7 +31,7 @@ class TokenManager @Inject()(credentials: Credentials, client: ClientWrapper) {
   def invalidateToken() = TokenManager.bearerToken = TokenManager.InvalidToken
 
   def retrieveToken(fetchToken: String => String): String = {
-    println("retrieveToken")
+    println("retrieveToken")       //TODO remove printlns
     TokenManager.bearerToken match {
       case InvalidToken => {
         setAccessToken(fetchToken("Basic " + base64EncodedCredentials.filter(_ >= ' ')))
